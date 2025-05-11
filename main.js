@@ -6,9 +6,9 @@ let currentMealType = '';
 let currentMenu = [];
 
 const breakfast = [
-  { name: "Tostadas con mermelada", price: 3 },
-  { name: "Cereal con leche", price: 2.5 },
-  { name: "Fruta fresca", price: 2.8 }
+  { name: "Tostadas con mermelada y coffe", price: 3 },
+  { name: "Cereales con leche y croissant", price: 2.5 },
+  { name: "Fruta fresca y colacao", price: 2.8 }
 ];
 
 const lunchDinnerBase = [
