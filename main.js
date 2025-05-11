@@ -47,7 +47,7 @@ function showComment() {
 function displayMenuOptions(menuArray, message, menuType) {
   let optionHTML = `<p>${message}</p><ul>`;
   menuArray.forEach(item => {
-    optionHTML += `<li><button onclick="selectOption('${item.name}', '${menuType}')">${item.name} ($${item.price})</button></li>`;
+    optionHTML += `<li><button onclick="selectOption('${item.name}', '${menuType}')">${item.name} (€${item.price})</button></li>`;
   });
   optionHTML += '</ul>';
   document.getElementById("menu").innerHTML = optionHTML;
@@ -79,6 +79,7 @@ function getMenuByHour(hour) {
     return null;
   }
 }
+
 
 // Maneja la selección del usuario
 function selectOption(selectedItemName, menuType) {
@@ -126,18 +127,18 @@ function showSummary() {
   let summaryHTML = `
     <h3>Resumen de tu pedido (${currentMealType}):</h3>
     <ul>
-      <li><strong>Plato:</strong> ${selectedMain.name} - $${selectedMain.price}</li>
+      <li><strong>Plato:</strong> ${selectedMain.name} - €${selectedMain.price}</li>
   `;
 
   if (currentMealType !== "Desayuno") {
     total += selectedAccomp1.price + selectedAccomp2.price + selectedDessert.price;
     summaryHTML += `
-      <li><strong>Acompañamientos:</strong> ${selectedAccomp1.name} y ${selectedAccomp2.name} - $${(selectedAccomp1.price + selectedAccomp2.price).toFixed(2)}</li>
-      <li><strong>Postre:</strong> ${selectedDessert.name} - $${selectedDessert.price}</li>
+      <li><strong>Acompañamientos:</strong> ${selectedAccomp1.name} y ${selectedAccomp2.name} - €${(selectedAccomp1.price + selectedAccomp2.price).toFixed(2)}</li>
+      <li><strong>Postre:</strong> ${selectedDessert.name} - €${selectedDessert.price}</li>
     `;
   }
 
-  summaryHTML += `</ul><p><strong>Total:</strong> $${total.toFixed(2)}</p>`;
+  summaryHTML += `</ul><p><strong>Total:</strong> €${total.toFixed(2)}</p>`;
   document.getElementById("resumen").innerHTML = summaryHTML;
 }
 
