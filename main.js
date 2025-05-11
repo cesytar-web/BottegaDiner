@@ -47,18 +47,26 @@ function showComment() {
 function displayMenuOptions(menuArray, message, menuType) {
   let optionHTML = `<p>${message}</p><ul>`;
   menuArray.forEach(item => {
-    optionHTML += `<li><button onclick="selectOption('${item.name}', '${menuType}')">${item.name} (€${item.price})</button></li>`;
+    let finalPrice = item.price;
+
+    // Aplica aumento del 20% solo para Cena en acompañamientos o postres
+    if (currentMealType === "Cena" && (menuType === 'accomp1' || menuType === 'accomp2' || menuType === 'dessert')) {
+      finalPrice = Number((item.price * 1.2).toFixed(2));
+    }
+
+    optionHTML += `<li><button onclick="selectOption('${item.name}', '${menuType}')">${item.name} (€${finalPrice})</button></li>`;
   });
   optionHTML += '</ul>';
   document.getElementById("menu").innerHTML = optionHTML;
 }
 
-// Buscar plato en menú
+
+// plato del menú
 function findDishInMenu(name, menu) {
   return menu.find(item => item.name === name);
 }
 
-// Obtener menú según la hora introducida
+// Obtener el menú según la hora introducida
 function getMenuByHour(hour) {
   if (hour >= 6 && hour < 12) {
     return { menu: breakfast, type: "Desayuno" };
@@ -81,7 +89,7 @@ function getMenuByHour(hour) {
 }
 
 
-// Maneja la selección del usuario
+// Selecciona una opción del menú
 function selectOption(selectedItemName, menuType) {
   let selectedDish;
 
@@ -120,7 +128,7 @@ function selectOption(selectedItemName, menuType) {
   }
 }
 
-// Muestra el resumen final del pedido
+// Resumen final del pedido
 function showSummary() {
   let total = parseFloat(selectedMain.price);
 
